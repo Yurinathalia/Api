@@ -1,0 +1,9 @@
+<div class="pokemon-card">
+  <img [src]="pokemon.imageUrl" [alt]="pokemon.name" />
+  <h2>{{ pokemon.name }}</h2>
+  <p><strong>Altura:</strong> {{ pokemon.height }}</p>
+  <p><strong>Peso:</strong> {{ pokemon.weight }}</p>
+  <p><strong>Exp. base:</strong> {{ pokemon.baseExperience }}</p>
+  <p><strong>Tipos:</strong> {{ pokemon.types.join(', ') }}</p>
+  <p><strong>Habilidades:</strong> {{ pokemon.abilities.join(', ') }}</p>
+</div>
