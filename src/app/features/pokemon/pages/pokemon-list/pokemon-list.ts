@@ -21,7 +21,6 @@ export class PokemonList implements OnInit, OnDestroy {
   searchTerm = '';
   isSearchMode = false;
 
-  // Subject que recibe cada cambio del input de búsqueda
   private searchSubject = new Subject<string>();
 
   constructor(private pokemonService: PokemonService) {}
@@ -38,8 +37,8 @@ export class PokemonList implements OnInit, OnDestroy {
   private setupSearch(): void {
     this.searchSubject
       .pipe(
-        debounceTime(500),          // espera 500ms después de la última tecla
-        distinctUntilChanged(),     // evita repetir la misma búsqueda
+        debounceTime(500),          
+        distinctUntilChanged(),     
         switchMap((term) => {
           if (!term.trim()) {
             this.isSearchMode = false;
@@ -58,7 +57,6 @@ export class PokemonList implements OnInit, OnDestroy {
           this.isLoading = false;
 
           if (!this.isSearchMode) {
-            // el usuario borró el texto: volvemos a la lista
             this.loadPokemons();
             return;
           }
@@ -78,7 +76,6 @@ export class PokemonList implements OnInit, OnDestroy {
       });
   }
 
-  // Se dispara cada vez que el usuario escribe en el input
   onSearchChange(term: string): void {
     this.searchSubject.next(term);
   }
