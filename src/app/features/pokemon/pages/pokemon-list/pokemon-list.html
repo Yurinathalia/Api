@@ -1,0 +1,33 @@
+<div class="pokemon-container">
+  <h1>Pokédex</h1>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Buscar por nombre o id (ej: pikachu, 25)"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchChange($event)"
+    />
+  </div>
+
+  <div *ngIf="isLoading" class="state-message loading">
+    Cargando Pokémon...
+  </div>
+
+  <div *ngIf="hasError && !isLoading" class="state-message error">
+    Ocurrió un error al cargar los datos.
+    <button (click)="retry()">Reintentar</button>
+  </div>
+
+  <div class="card-grid" *ngIf="!isLoading && !hasError">
+    <app-pokemon-card
+      *ngFor="let pokemon of pokemons"
+      [pokemon]="pokemon">
+    </app-pokemon-card>
+  </div>
+
+  <div class="pagination" *ngIf="!isLoading && !isSearchMode">
+    <button (click)="previousPage()" [disabled]="offset === 0">Anterior</button>
+    <button (click)="nextPage()">Siguiente</button>
+  </div>
+</div>
